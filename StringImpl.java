@@ -3,16 +3,19 @@ import java.util.Scanner;
 
 public class StringImpl{
 	
-	public static void main(String args[]){
+	public static void fnStringImpl(){
 		
+		
+	System.out.println("This program teaches the basics of the string class in Java\n\n");
+	
 	Scanner in = new Scanner(System.in);
 	
 	String s1;
 	
-	System.out.println("Enter a string\n");
+	System.out.println("Enter a string:");
 	s1 = in.nextLine();
 	
-	System.out.println("String you entered: " + s1 + "\n");
+	System.out.println("String you entered: " + s1);
 	
 	int len = s1.length();
 	
