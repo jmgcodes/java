@@ -17,8 +17,11 @@ public class TextProcessing{
 		
 		Scanner in = new Scanner(System.in);
 		
-		List tokenList = new ArrayList();
+		List<String> tokenList = new ArrayList();
+		Map<String,Integer> tokenPair = new TreeMap<String, Integer>();
 		
+		
+		//PartA
 		String filePath;
 		System.out.println("Enter the file path:");
 		
@@ -32,15 +35,21 @@ public class TextProcessing{
 			return;
 		}			
 			
-		System.out.println("Tokens: " + tokenList);
+		print(tokenList);
+		
+		
+		//PartB
+		
+		tokenPair = computeWordFrequencies(tokenList);
+		print(tokenPair);
 			
 	}
 	
 	
-	public static List tokenizeFile(String FileName){
+	public static List<String> tokenizeFile(String FileName){
 		
 		BufferedReader brSample = null;
-		List tokenList = new ArrayList();
+		List<String> tokenList = new ArrayList();
 		
 		try {
  
@@ -48,10 +57,8 @@ public class TextProcessing{
 			brSample = new BufferedReader(new FileReader(FileName));
  
 			while ((strSample = brSample.readLine()) != null) {
-				
-				System.out.println(strSample);
-		
-				for(String words: strSample.split("[^a-zA-Z0-9]+")){
+					
+				for(String words: strSample.toLowerCase().split("[^a-z0-9]+")){
 					tokenList.add(words);
 				}
 		
@@ -73,6 +80,40 @@ public class TextProcessing{
 		}
 	
 		return tokenList;
+	}
+	
+	public static void print(List<String> tokenList){
+		
+		//System.out.println("Tokens: " + tokenList);
+		
+	}
+	
+	public static Map<String, Integer> computeWordFrequencies(List<String> tokenList){
+		
+		Map<String,Integer> tokenPairTemp = new TreeMap<String, Integer>();
+		
+		for (String token : tokenList) {
+			Integer count = tokenPairTemp.get(token);
+			count = (count == null) ? 1 : ++count;
+			tokenPairTemp.put(token, count);
+		}
+		
+		return tokenPairTemp;
+	
+	}
+	
+	public static void print(Map<String, Integer> tokenPair){
+		
+		System.out.println("\nTokens: " + tokenPair.size());
+		
+		//System.out.println("\n\tToken\t\tFrequency\n\t-----\t\t---------\n");
+		
+		for(String token : tokenPair.keySet()){
+			
+			//System.out.println("\t" + token + "\t\t" + tokenPair.get(token));
+
+		}
+		
 	}
 	
 }
