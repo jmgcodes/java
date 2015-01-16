@@ -22,6 +22,7 @@ public class TextProcessing{
 		List<String> tokenList = new ArrayList();
 		Map<String,Integer> tokenPair = new HashMap<String, Integer>();
 		Map<String,Integer> twoGramPair = new HashMap<String, Integer>();
+		Map<String,Integer> palindromePair = new HashMap<String, Integer>();
 
 		
 		//PartA
@@ -52,7 +53,10 @@ public class TextProcessing{
 		twoGramPair = computeTwoGramFrequencies(tokenList);
 		printTwoGram(twoGramPair);
 		
-			
+		//PartD
+		
+		palindromePair = computePalindromeFrequencies(tokenList);
+		printPalindrome(palindromePair);
 	}
 	
 	//Part A
@@ -173,6 +177,61 @@ public class TextProcessing{
         
         for(Map.Entry<String, Integer> mapEntry: twoGramPairList){
             System.out.println("\t" + mapEntry.getValue() + "\t" + mapEntry.getKey());
+        }
+						
+	}
+	
+	
+	//Part D
+	
+	public static Map<String, Integer> computePalindromeFrequencies(List<String> tokenList){
+		
+		Map<String,Integer> palindromePairTemp = new HashMap<String, Integer>();
+		
+		for (String token : tokenList) {
+			
+			int len = token.length();
+			int palindrome = 0;
+			
+			for(int i=0, j=len-1; i<j; i++, j--){
+				if(token.charAt(i)==token.charAt(j))
+					palindrome = 1;
+				else{
+					palindrome = 0;
+					break;
+				}
+			}
+			
+			if(palindrome==1){	
+				Integer count = palindromePairTemp.get(token);
+				count = (count == null) ? 1 : ++count;
+				palindromePairTemp.put(token, count);
+			}
+			
+		}
+		
+		return palindromePairTemp;
+	
+	}
+	
+	public static void printPalindrome(Map<String, Integer> palindromePair){
+		
+		System.out.println("\nPalindromes: " + palindromePair.size());
+		
+		System.out.println("\n\tFrequency - Palindromes\n\t---------   -----------\n");
+		
+		Set<Entry<String, Integer>> palindromePairSet = palindromePair.entrySet();
+        List<Entry<String, Integer>> palindromePairList = new ArrayList<Entry<String, Integer>>(palindromePairSet);
+        Collections.sort( palindromePairList, new Comparator<Map.Entry<String, Integer>>()
+        {
+            public int compare( Map.Entry<String, Integer> mapEntry1, Map.Entry<String, Integer> mapEntry2 )
+            {
+                return (mapEntry2.getValue()).compareTo( mapEntry1.getValue() );
+            }
+        } );
+        
+        for(Map.Entry<String, Integer> mapEntry: palindromePairList){
+            System.out.println("\t" + mapEntry.getValue() + "\t\t" + mapEntry.getKey());
         }
 						
 	}
