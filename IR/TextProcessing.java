@@ -99,7 +99,7 @@ public class TextProcessing{
 	
 	public static void print(List<String> tokenList){
 		
-		//System.out.println("Tokens: " + tokenList);
+		System.out.println("Tokens: " + tokenList);
 		
 	}
 	
@@ -184,7 +184,7 @@ public class TextProcessing{
 	
 	
 	//Part D
-	
+	/*
 	public static Map<String, Integer> computePalindromeFrequencies(List<String> tokenList){
 
 		Map<String,Integer> palindromePairTemp = new HashMap<String, Integer>();
@@ -229,9 +229,75 @@ public class TextProcessing{
 		
 		return palindromePairTemp;
 	
+	}*/
+	
+	public static Map<String, Integer> computePalindromeFrequencies(List<String> tokenList){
+
+		Map<String,Integer> palindromePairTemp = new HashMap<String, Integer>();
+		
+		int indexToken = 0;	
+		int indexNotIncl = -1;	
+		
+		for (String token : tokenList) {
+						
+			boolean palindrome = false;
+			/*
+			palindrome = isPalindrome(token);
+			
+			if(palindrome){	
+				Integer count = palindromePairTemp.get(token);
+				count = (count == null) ? 1 : ++count;
+				palindromePairTemp.put(token, count);
+			}
+			*/
+			
+			int index = indexToken;
+			int indexPal = -1;
+			
+			int strlen = 0;
+			String strTemp = "";
+			String strPalindrome = "";
+			
+			while(strlen<=20 && index < tokenList.size()){
+				
+				strTemp += tokenList.get(index);
+				
+				palindrome = isPalindrome(strTemp);
+			
+				if(palindrome){	
+					
+					strPalindrome = strTemp;
+					indexPal = index;
+					//indexToken = index;
+					
+				}
+				
+				strlen = strTemp.length();
+				index++;
+			}
+			
+			if(strPalindrome.length() > 1 && indexPal > indexNotIncl){
+				
+				Integer count = palindromePairTemp.get(strPalindrome);
+				count = (count == null) ? 1 : ++count;
+				palindromePairTemp.put(strPalindrome, count);
+				
+				indexNotIncl = indexPal;
+				
+			}
+
+			
+			indexToken++;
+		}
+		
+		return palindromePairTemp;
+	
 	}
 	
 	public static boolean isPalindrome(String str){
+		
+		System.out.println("Pal: " + str);
+
 		
 		int len = str.length();
 			
@@ -250,7 +316,7 @@ public class TextProcessing{
 		
 		System.out.println("\nPalindromes: " + palindromePair.size());
 		
-		//System.out.println("\n\tFrequency - Palindromes\n\t---------   -----------\n");
+		System.out.println("\n\tFrequency - Palindromes\n\t---------   -----------\n");
 		
 		Set<Entry<String, Integer>> palindromePairSet = palindromePair.entrySet();
         List<Entry<String, Integer>> palindromePairList = new ArrayList<Entry<String, Integer>>(palindromePairSet);
@@ -263,7 +329,7 @@ public class TextProcessing{
         } );
         
         for(Map.Entry<String, Integer> mapEntry: palindromePairList){
-            //System.out.println("\t" + mapEntry.getValue() + "\t\t" + mapEntry.getKey());
+            System.out.println("\t" + mapEntry.getValue() + "\t\t" + mapEntry.getKey());
         }
 						
 	}
