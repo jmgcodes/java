@@ -99,7 +99,7 @@ public class TextProcessing{
 	
 	public static void print(List<String> tokenList){
 		
-		System.out.println("Tokens: " + tokenList);
+		//System.out.println("Tokens: " + tokenList);
 		
 	}
 	
@@ -177,7 +177,7 @@ public class TextProcessing{
         } );
         
         for(Map.Entry<String, Integer> mapEntry: twoGramPairList){
-           // System.out.println("\t" + mapEntry.getValue() + "\t" + mapEntry.getKey());
+          //  System.out.println("\t" + mapEntry.getValue() + "\t" + mapEntry.getKey());
         }
 						
 	}
@@ -296,8 +296,6 @@ public class TextProcessing{
 	
 	public static boolean isPalindrome(String str){
 		
-		System.out.println("Pal: " + str);
-
 		
 		int len = str.length();
 			
@@ -316,7 +314,7 @@ public class TextProcessing{
 		
 		System.out.println("\nPalindromes: " + palindromePair.size());
 		
-		System.out.println("\n\tFrequency - Palindromes\n\t---------   -----------\n");
+		//System.out.println("\n\tFrequency - Palindromes\n\t---------   -----------\n");
 		
 		Set<Entry<String, Integer>> palindromePairSet = palindromePair.entrySet();
         List<Entry<String, Integer>> palindromePairList = new ArrayList<Entry<String, Integer>>(palindromePairSet);
@@ -329,7 +327,7 @@ public class TextProcessing{
         } );
         
         for(Map.Entry<String, Integer> mapEntry: palindromePairList){
-            System.out.println("\t" + mapEntry.getValue() + "\t\t" + mapEntry.getKey());
+           // System.out.println("\t" + mapEntry.getValue() + "\t\t" + mapEntry.getKey());
         }
 						
 	}
