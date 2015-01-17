@@ -99,7 +99,7 @@ public class TextProcessing{
 	
 	public static void print(List<String> tokenList){
 		
-		//System.out.println("Tokens: " + tokenList);
+		System.out.println("Tokens: " + tokenList);
 		
 	}
 	
