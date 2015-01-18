@@ -26,37 +26,60 @@ public class TextProcessing{
 
 		
 		//PartA
-		String filePath;
-		System.out.println("Enter the file path:");
+		while(true){
+			String filePath;
+			System.out.println("Enter the file path:");
 		
-		filePath = in.nextLine();
-		File file = new File(filePath);
+			filePath = in.nextLine();
+			File file = new File(filePath);
 	
-		if(file.exists() && !file.isDirectory())
-			tokenList = tokenizeFile(filePath);
-		else{
-			System.out.println("File not found");
-			return;
-		}			
+			if(file.exists() && !file.isDirectory()){
+				tokenList = tokenizeFile(filePath);
+				System.out.println("********File tokenized Successfully*********");
+				break;
+			}
+			else{
+				System.out.println("File not found. Try again.");
+			}			
+		}
+		
+		System.out.println("\n" + tokenList.size() + " tokens found. Would you like to print the list? [y/n]");
+		
+		String userip = in.nextLine();
+		if(userip.equals("y") || userip.equals("Y"))
+			print(tokenList);
 			
-		//print(tokenList);
+		while(true){
+				
+			System.out.println("\n----------------------------\nWhat would you like to do? \n1. Compute and print word frequencies.\n2. Compute Two Grams and print their frequency.\n3. Compute palindrome and print their frequency.\n4. All of the above. \n5. Quit\nYour choice?");
+			int useripint = in.nextInt();		
 		
+			if(useripint == 5)
+				return;
+				
+			if(useripint == 1 || useripint == 4){
+				//PartB
+			
+				tokenPair = computeWordFrequencies(tokenList);
+				printToken(tokenPair);
+			}
+			
+			if(useripint == 2 || useripint == 4){
+				//PartC
 		
-		//PartB
-		
-		tokenPair = computeWordFrequencies(tokenList);
-		printToken(tokenPair);
-		
-		
-		//PartC
-		
-		twoGramPair = computeTwoGramFrequencies(tokenList);
-		printTwoGram(twoGramPair);
-		
-		//PartD
-		
-		palindromePair = computePalindromeFrequencies(tokenList);
-		printPalindrome(palindromePair);
+				twoGramPair = computeTwoGramFrequencies(tokenList);
+				printTwoGram(twoGramPair);
+			}
+			
+			if(useripint == 3 || useripint == 4){
+				//PartD
+			
+				palindromePair = computePalindromeFrequencies(tokenList);
+				printPalindrome(palindromePair);
+			}
+			
+			
+		}
 	}
 	
 	//Part A
