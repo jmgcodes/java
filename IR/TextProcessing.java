@@ -1,14 +1,13 @@
-import java.util.*;
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.util.StringTokenizer;
-import java.util.Map.Entry;
-
 /*
  * Author: Jwala Mohith Girisha
  * 
  */
 
+import java.util.*;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.util.StringTokenizer;
+import java.util.Map.Entry;
 import java.io.IOException;
 import java.io.File;
  
@@ -24,7 +23,6 @@ public class TextProcessing{
 		Map<String,Integer> twoGramPair = new HashMap<String, Integer>();
 		Map<String,Integer> palindromePair = new HashMap<String, Integer>();
 
-		
 		//PartA
 		while(true){
 			String filePath;
