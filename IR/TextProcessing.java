@@ -39,7 +39,7 @@ public class TextProcessing{
 			return;
 		}			
 			
-		print(tokenList);
+		//print(tokenList);
 		
 		
 		//PartB
@@ -120,7 +120,7 @@ public class TextProcessing{
 	
 	public static void printToken(Map<String, Integer> tokenPair){
 		
-		System.out.println("\nTokens: " + tokenPair.size());
+		int tokenCount = 0;
 		
 		//System.out.println("\n\tFrequency - Token\n\t---------   -----\n");
 		
@@ -135,9 +135,15 @@ public class TextProcessing{
         } );
         
         for(Map.Entry<String, Integer> mapEntry:tokenPairList){
+			
+			tokenCount += mapEntry.getValue();
           //  System.out.println("\t" + mapEntry.getValue() + "\t" + mapEntry.getKey());
         }
-						
+		
+		System.out.println("\nTotal number of Tokens: " + tokenCount);
+		System.out.println("Total number of Unique Tokens: " + tokenPair.size());
+
+			
 	}
 	
 	//Part C
@@ -148,8 +154,15 @@ public class TextProcessing{
 		
 		String previous = "";
 		for (String token : tokenList) {
-			String tokenTemp = (previous == "") ? token: previous + " " + token;
-			previous = token;
+			String tokenTemp = "";
+			if(previous == ""){
+				previous = token;
+				continue;
+			}
+			else{
+				tokenTemp = previous + " " + token;
+				previous = token;
+			}
 			Integer count = twoGramPairTemp.get(tokenTemp);
 			count = (count == null) ? 1 : ++count;
 			twoGramPairTemp.put(tokenTemp, count);
@@ -162,7 +175,7 @@ public class TextProcessing{
 	
 	public static void printTwoGram(Map<String, Integer> twoGramPair){
 		
-		System.out.println("\nTwo Grams: " + twoGramPair.size());
+		int twoGramCount = 0;
 		
 		//System.out.println("\n\tFrequency - Two Grams\n\t---------   ---------\n");
 		
@@ -177,8 +190,14 @@ public class TextProcessing{
         } );
         
         for(Map.Entry<String, Integer> mapEntry: twoGramPairList){
-          //  System.out.println("\t" + mapEntry.getValue() + "\t" + mapEntry.getKey());
+			
+			twoGramCount += mapEntry.getValue();
+            //System.out.println("\t" + mapEntry.getValue() + "\t" + mapEntry.getKey());
         }
+        
+        System.out.println("\nTotal number of Two Grams: " + twoGramCount);
+		System.out.println("Total number of Unique Two Grams: " + twoGramPair.size());
+
 						
 	}
 	
@@ -312,8 +331,8 @@ public class TextProcessing{
 	
 	public static void printPalindrome(Map<String, Integer> palindromePair){
 		
-		System.out.println("\nPalindromes: " + palindromePair.size());
-		
+		int palindromeCount = 0;
+				
 		//System.out.println("\n\tFrequency - Palindromes\n\t---------   -----------\n");
 		
 		Set<Entry<String, Integer>> palindromePairSet = palindromePair.entrySet();
@@ -327,8 +346,14 @@ public class TextProcessing{
         } );
         
         for(Map.Entry<String, Integer> mapEntry: palindromePairList){
+			
+			palindromeCount += mapEntry.getValue();
            // System.out.println("\t" + mapEntry.getValue() + "\t\t" + mapEntry.getKey());
         }
+        
+        System.out.println("\nTotal number of Palindromes: " + palindromeCount);
+		System.out.println("Total number of Unique Palindromes: " + palindromePair.size());
+
 						
 	}
 	
