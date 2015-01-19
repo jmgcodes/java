@@ -4,7 +4,7 @@
  */
 
 import java.util.Scanner;
-
+import java.util.Date;
 
 
 public class MySearchEngine{
@@ -18,8 +18,7 @@ public class MySearchEngine{
 	
 		System.out.println("Part1: Text Processing\n-----------------------------------------------------------------\n");
 		TextProcessing.fnBeginTextProcessing();
-		
-	
+
 	}
 	
 }

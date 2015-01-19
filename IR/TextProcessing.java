@@ -4,6 +4,7 @@
  */
 
 import java.util.*;
+import java.util.Date;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.BufferedWriter;
@@ -58,6 +59,7 @@ public class TextProcessing{
 		if(userip.equals("y") || userip.equals("Y"))
 			print(tokenList);
 			
+		
 		while(true){
 				
 			System.out.println("\n----------------------------\nWhat would you like to do? \n1. Compute and print word frequencies.\n2. Compute Two Grams and print their frequency.\n3. Compute palindrome and print their frequency.\n4. All of the above. \n5. Quit\nYour choice?");
@@ -103,6 +105,9 @@ public class TextProcessing{
 	 */
 	public static List<String> tokenizeFile(String FileName){
 		
+        System.out.println(new Date().toString());	
+
+		
 		BufferedReader brSample = null;
 		List<String> tokenList = new ArrayList();
 		
@@ -132,6 +137,8 @@ public class TextProcessing{
 			}
 		}
 	
+        System.out.println(new Date().toString());	
+
 		return tokenList;
 	}
 	
@@ -154,6 +161,10 @@ public class TextProcessing{
 	 * 
 	 */
 	public static Map<String, Integer> computeWordFrequencies(List<String> tokenList){
+		
+				
+        System.out.println(new Date().toString());	
+
 		
 		Map<String,Integer> tokenPairTemp = new HashMap<String, Integer>();
 		
@@ -185,8 +196,7 @@ public class TextProcessing{
 			
 			//System.out.println("\n\tFrequency - Token\n\t---------   -----\n");
 			
-			Set<Entry<String, Integer>> tokenPairSet = tokenPair.entrySet();
-			List<Entry<String, Integer>> tokenPairList = new ArrayList<Entry<String, Integer>>(tokenPairSet);
+			List<Entry<String, Integer>> tokenPairList = new ArrayList<Entry<String, Integer>>(tokenPair.entrySet());
 			Collections.sort( tokenPairList, new Comparator<Map.Entry<String, Integer>>()
 			{
 				public int compare( Map.Entry<String, Integer> mapEntry1, Map.Entry<String, Integer> mapEntry2 )
@@ -270,8 +280,7 @@ public class TextProcessing{
 		
 		//System.out.println("\n\tFrequency - Two Grams\n\t---------   ---------\n");
 		
-		Set<Entry<String, Integer>> twoGramPairSet = twoGramPair.entrySet();
-        List<Entry<String, Integer>> twoGramPairList = new ArrayList<Entry<String, Integer>>(twoGramPairSet);
+        List<Entry<String, Integer>> twoGramPairList = new ArrayList<Entry<String, Integer>>(twoGramPair.entrySet());
         Collections.sort( twoGramPairList, new Comparator<Map.Entry<String, Integer>>()
         {
             public int compare( Map.Entry<String, Integer> mapEntry1, Map.Entry<String, Integer> mapEntry2 )
@@ -319,7 +328,7 @@ public class TextProcessing{
 		int indexToken = 0;	
 		int indexNotIncl = -1;	
 		
-		for (String token : tokenList) {
+		for (;indexToken<tokenList.size();) {
 						
 			boolean palindrome = false;
 				
@@ -397,8 +406,7 @@ public class TextProcessing{
 				
 		//System.out.println("\n\tFrequency - Palindromes\n\t---------   -----------\n");
 		
-		Set<Entry<String, Integer>> palindromePairSet = palindromePair.entrySet();
-        List<Entry<String, Integer>> palindromePairList = new ArrayList<Entry<String, Integer>>(palindromePairSet);
+        List<Entry<String, Integer>> palindromePairList = new ArrayList<Entry<String, Integer>>(palindromePair.entrySet());
         Collections.sort( palindromePairList, new Comparator<Map.Entry<String, Integer>>()
         {
             public int compare( Map.Entry<String, Integer> mapEntry1, Map.Entry<String, Integer> mapEntry2 )
@@ -420,6 +428,9 @@ public class TextProcessing{
 		System.out.println("Total number of Unique Palindromes: " + palindromePair.size());
 
 		bwSample.close();
+		
+		System.out.println(new Date().toString());
+
 
 		} catch (IOException e) {
 			e.printStackTrace();
