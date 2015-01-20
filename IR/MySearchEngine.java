@@ -14,10 +14,11 @@ public class MySearchEngine{
 		Scanner in = new Scanner(System.in);
 	
 		System.out.println("Search Engine Implementation");
-		System.out.println("Loading.....\n\n");
 	
-		System.out.println("Part1: Text Processing\n-----------------------------------------------------------------\n");
-		TextProcessing.fnBeginTextProcessing();
+		System.out.println("\nPart1: Text Processing\n-----------------------------------------------------------------\n");
+		
+		TextProcessing txtProcObj = new TextProcessing();
+		txtProcObj.fnBeginTextProcessing();
 
 	}
 	

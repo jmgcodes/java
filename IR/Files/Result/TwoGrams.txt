@@ -1,4 +1,4 @@
-1	sse t
-1	ss sse
-1	t ess
-1	te ss
+1	test file
+1	is a
+1	this is
+1	a test

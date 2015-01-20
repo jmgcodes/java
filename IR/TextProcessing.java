@@ -4,15 +4,14 @@
  */
 
 import java.util.*;
-import java.util.Date;
+
+import java.io.File;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
-import java.util.StringTokenizer;
-import java.util.Map.Entry;
 import java.io.IOException;
-import java.io.File;
+import java.util.Map.Entry;
  
  
  
@@ -20,7 +19,7 @@ public class TextProcessing{
 
 	/***************** START OF fnBeginTextProcessing METHOD *****************************/
 	
-	public static void fnBeginTextProcessing(){
+	public void fnBeginTextProcessing(){
 		
 		Scanner in = new Scanner(System.in);
 		
@@ -45,15 +44,20 @@ public class TextProcessing{
 	
 			if(file.exists() && !file.isDirectory()){
 				tokenList = tokenizeFile(filePath);
-				System.out.println("********File tokenized Successfully*********");
+				if(tokenList.size() == 0){
+					System.out.println("File empty. Try another file. \n");
+					continue;
+				}
+					
+				System.out.println("\n********File tokenized Successfully*********");
 				break;
 			}
 			else{
-				System.out.println("File not found. Try again. \nEnter the file path:");
+				System.out.println("File not found. Try again. \n");
 			}			
 		}
 		
-		System.out.println("\n" + tokenList.size() + " tokens found. Would you like to print the list? [y/n]");
+		System.out.println(tokenList.size() + " tokens found. Would you like to print the list? [y/n]");
 		
 		String userip = in.nextLine();
 		if(userip.equals("y") || userip.equals("Y"))
@@ -62,7 +66,7 @@ public class TextProcessing{
 		
 		while(true){
 				
-			System.out.println("\n----------------------------\nWhat would you like to do? \n1. Compute and print word frequencies.\n2. Compute Two Grams and print their frequency.\n3. Compute palindrome and print their frequency.\n4. All of the above. \n5. Quit\nYour choice?");
+			System.out.println("\n----------------------------\nWhat would you like to do? \n1. Compute and print token frequencies.\n2. Compute Two Grams and print their frequency.\n3. Compute palindrome and print their frequency.\n4. All of the above. \n5. Quit\nYour choice?");
 			int useripint = in.nextInt();		
 		
 			if(useripint == 5)
@@ -103,11 +107,9 @@ public class TextProcessing{
 	 * Print tokens.
 	 *  
 	 */
-	public static List<String> tokenizeFile(String FileName){
+	private List<String> tokenizeFile(String FileName){
 		
-        System.out.println(new Date().toString());	
-
-		
+	
 		BufferedReader brSample = null;
 		List<String> tokenList = new ArrayList();
 		
@@ -137,12 +139,10 @@ public class TextProcessing{
 			}
 		}
 	
-        System.out.println(new Date().toString());	
-
 		return tokenList;
 	}
 	
-	public static void print(List<String> tokenList){
+	private void print(List<String> tokenList){
 		
 		System.out.println("Tokens: " + tokenList);
 		
@@ -160,11 +160,9 @@ public class TextProcessing{
 	 * Print token frequencies (Writes to file 'Token.txt')
 	 * 
 	 */
-	public static Map<String, Integer> computeWordFrequencies(List<String> tokenList){
+	private Map<String, Integer> computeWordFrequencies(List<String> tokenList){
 		
 				
-        System.out.println(new Date().toString());	
-
 		
 		Map<String,Integer> tokenPairTemp = new HashMap<String, Integer>();
 		
@@ -178,7 +176,7 @@ public class TextProcessing{
 	
 	}
 	
-	public static void printToken(Map<String, Integer> tokenPair){
+	private void printToken(Map<String, Integer> tokenPair){
 		
 		try{
 			
@@ -209,12 +207,12 @@ public class TextProcessing{
 				
 				tokenCount += mapEntry.getValue();
 			  //  System.out.println("\t" + mapEntry.getValue() + "\t" + mapEntry.getKey());
-			  
 				bwSample.write(mapEntry.getValue() + "\t" + mapEntry.getKey() + "\n");
 
 			}
 			
-			System.out.println("\nTotal number of Tokens: " + tokenCount);
+			System.out.println("\n**** Tokens saved into 'Tokens.txt' ****");
+			System.out.println("Total number of Tokens: " + tokenCount);
 			System.out.println("Total number of Unique Tokens: " + tokenPair.size());
 
 			bwSample.close();
@@ -237,7 +235,7 @@ public class TextProcessing{
 	 * Print two grams (Write to file 'TwoGrams.txt')
 	 * 
 	 */
-	public static Map<String, Integer> computeTwoGramFrequencies(List<String> tokenList){
+	private Map<String, Integer> computeTwoGramFrequencies(List<String> tokenList){
 		
 		Map<String,Integer> twoGramPairTemp = new HashMap<String, Integer>();
 		
@@ -262,7 +260,7 @@ public class TextProcessing{
 	
 	}
 	
-	public static void printTwoGram(Map<String, Integer> twoGramPair){
+	private void printTwoGram(Map<String, Integer> twoGramPair){
 		
 		try{
 			File fileTwoGrams = new File("./Files/Result/TwoGrams.txt");
@@ -293,12 +291,12 @@ public class TextProcessing{
 			
 			twoGramCount += mapEntry.getValue();
             //System.out.println("\t" + mapEntry.getValue() + "\t" + mapEntry.getKey());
-            
 			bwSample.write(mapEntry.getValue() + "\t" + mapEntry.getKey() + "\n");
 
         }
         
-        System.out.println("\nTotal number of Two Grams: " + twoGramCount);
+        System.out.println("\n**** Two Grams saved into 'TwoGrams.txt' ****");
+		System.out.println("Total number of Two Grams: " + twoGramCount);
 		System.out.println("Total number of Unique Two Grams: " + twoGramPair.size());
 		
 		bwSample.close();
@@ -321,7 +319,7 @@ public class TextProcessing{
 	 * Print palindromes (Write to file 'Palindromes.txt')
 	 * 
 	 */
-	public static Map<String, Integer> computePalindromeFrequencies(List<String> tokenList){
+	private Map<String, Integer> computePalindromeFrequencies(List<String> tokenList){
 
 		Map<String,Integer> palindromePairTemp = new HashMap<String, Integer>();
 		
@@ -374,7 +372,7 @@ public class TextProcessing{
 	
 	}
 	
-	public static boolean isPalindrome(String str){
+	private boolean isPalindrome(String str){
 		
 		
 		int len = str.length();
@@ -390,7 +388,7 @@ public class TextProcessing{
 			return true;
 	}
 	
-	public static void printPalindrome(Map<String, Integer> palindromePair){
+	private void printPalindrome(Map<String, Integer> palindromePair){
 		
 		try{
 			File filePalindrome = new File("./Files/Result/Palindromes.txt");
@@ -419,18 +417,16 @@ public class TextProcessing{
 			
 			palindromeCount += mapEntry.getValue();
            // System.out.println("\t" + mapEntry.getValue() + "\t\t" + mapEntry.getKey());
-           
    			bwSample.write(mapEntry.getValue() + "\t" + mapEntry.getKey() + "\n");
 
         }
         
-        System.out.println("\nTotal number of Palindromes: " + palindromeCount);
+        System.out.println("\n**** Palindromes saved into 'Palindromes.txt' ****");
+        System.out.println("Total number of Palindromes: " + palindromeCount);
 		System.out.println("Total number of Unique Palindromes: " + palindromePair.size());
 
 		bwSample.close();
 		
-		System.out.println(new Date().toString());
-
 
 		} catch (IOException e) {
 			e.printStackTrace();
