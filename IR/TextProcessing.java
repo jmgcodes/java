@@ -1,5 +1,33 @@
 /*
  * Author: Jwala Mohith Girisha
+ * Student ID: 12647996
+ * 
+ * This is the implementation class for TextProcessing. 
+ * 
+ * Functions:
+ * 1. fnBeginTextProcessing: Collects the file name and other commands from the user and invokes appropriate functions.
+ * 
+ * PartA
+ * 2. tokenizeFile: Read the file line by line and converts the words into tokens and stores into a list object.
+ * 3. print: Prints the list of tokens to the screen.
+ * 
+ * PartB
+ * 4. computeWordFrequencies: Computes the frequencies of token in the list.
+ * 5. printToken: Write the tokens and their frequencies to a file.
+ * 
+ * PartC
+ * 6. computeTwoGramFrequencies: Computes the Two grams from the token list and calculates their frequencies.
+ * 7. printTwoGram: Write the two grams and their frequencies to a file.
+ * 
+ * PartD
+ * 8. computePalindromeFrequencies: Computes the Palindromes from the list and calculates their frequencies.
+ * 9. isPalindrome: Checks if a string is a palindrome.
+ * 10. printPalindrome: Write the Palindromes and their frequencies to a file.
+ * 
+ * Disclosure:
+ * The logic to sort entries of a map object was referred from
+ * http://stackoverflow.com/questions/109383/how-to-sort-a-mapkey-value-on-the-values-in-java
+ * The code in the above location has been modified to fit the specifications of this problem with clear understanding.
  * 
  */
 
