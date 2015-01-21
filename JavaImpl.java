@@ -12,6 +12,7 @@ public class JavaImpl{
 		System.out.println("1. String class basics");
 		System.out.println("2. Binary and Gray code");
 		System.out.println("3. Merge sort array");
+		System.out.println("4. Merge sort LL");
 
 		System.out.println("\nEnter the program you like to run: ");
 		
@@ -32,6 +33,11 @@ public class JavaImpl{
 				
 			case 3:
 				MergeSort.fnMergeSort();
+				break;
+				
+			case 4:
+				LLMergeSort LLMS = new LLMergeSort();
+				LLMS.fnLLMergeSort();
 				break;
 				
 			default:
