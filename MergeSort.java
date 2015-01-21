@@ -26,7 +26,7 @@ public class MergeSort{
 		
 		System.out.println("Array to be sorted: " + Arrays.toString(arr));
 		
-		arr = mergeSortArray(arr, n);
+		arr = mergeSortArray(arr, n-1);
 		
 		System.out.println("Sorted Array: " + Arrays.toString(arr));
 		
@@ -34,34 +34,36 @@ public class MergeSort{
 	
 	public static int[] mergeSortArray(int arr[], int size){
 		
-		if(size==1)
+		if(size == 0)
 			return arr;
 			
-		int mid = (size)/2;
+		int mid = size/2;
 		
-		int a[] = new int[mid];
-		int b[] = new int[mid];
+		int a[] = new int[mid+1];
+		int b[] = new int[size-mid];
 		
-		for(int i=0; i< mid; i++){
-			a[i] = arr[i];
-			b[i] = arr[i+mid];
+		for(int i=0, j=0;i<=mid;i++,j++){
+			a[j] = arr[i];
 		}
+		for(int i = mid+1,j=0;i<=size;i++,j++){
+			b[j] = arr[i];
+		}
+			
+		a = mergeSortArray(a, a.length-1);
+		b = mergeSortArray(b, b.length-1);
 		
-		a = mergeSortArray(a, mid);
-		b = mergeSortArray(b, mid);
-		
-		return mergeArray(a, b, mid);
+		return mergeArray(a, b , a.length, b.length);
 		
 	}
 	
-	public static int[] mergeArray(int a[], int b[], int size){
+	public static int[] mergeArray(int a[], int b[], int size1, int size2){
 		
-		int rn = 2*size;
+		int rn = size1+size2;
 		int result[] = new int[rn];
 		int n = 0;
 		int i=0; int j=0;
 		
-		while(i!=size && j!=size){
+		while(i!=size1 && j!=size2){
 				
 				if(a[i]<b[j]){
 					result[n] = a[i];
@@ -76,13 +78,13 @@ public class MergeSort{
 				
 		}
 		
-		if(i!=size){
-			for(int x=i; x<size; x++,n++)
+		if(i!=size1){
+			for(int x=i; x<size1; x++,n++)
 				result[n] = a[x];
 		}
 		
-		if(j!=size){
-			for(int x=j; x<size; x++,n++)
+		if(j!=size2){
+			for(int x=j; x<size2; x++,n++)
 				result[n] = b[x];
 		}	
 		
